@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en" class="h-100">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.88.1">
+    <title>Home</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/cover/">
+    <link href="mainstyle.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/docs/5.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+
+
+
+</head>
+
+<body class="d-flex h-100 text-center text-white bg-dark">
+
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+        <header class="mb-auto">
+            <div class="position">
+
+                <nav class="nav nav-masthead justify-content-center float-md-end">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    <a class="nav-link" href="projects.html">Projects</a>
+                    <a class="nav-link" href="about.html">About</a>
+                </nav>
+            </div>
+        </header>
+
+        <main class="px-3">
+            <h1 id="dayTime"></h1>
+            <p class="lead">Welcome to my Homepage, where I am going to show you what projects I have done over the past
+                three years and where I am going to talk about myself.</p>
+
+        </main>
+
+        <footer class="mt-auto text-white-50">
+
+        </footer>
+    </div>
+
+
+
+</body>
+
+</html>
+<script>
+    var dt = new Date();
+    var time = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
+    
+    if (time < '12:00:00') {
+        $('#dayTime').html("Good Morning");
+    }
+    else if (time >= '12:00:00' && time < '18:00:00') {
+        $('#dayTime').html("Good Afternoon");
+    }
+    else if (time > '18:00:00') {
+        $('#dayTime').html("Good Evening");
+    }
+</script>

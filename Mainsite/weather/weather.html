@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="weather.css" rel="stylesheet">
+    <script src="js/ie-emulation-modes-warning.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    
+</head>
+
+<body>
+    <input type="text" id="city" class="searchField" />
+    <button class="btn">Search</button>
+    <br />
+
+
+    <div style="text-align: center;">
+        <div style="display: inline-block; text-align: left;">
+            <div class="text-align">
+                <span id="temptxt"></span>
+                <b id="temp"></b>
+                <br />
+
+                <span id="tempfeeltxt"></span>
+                <b id="feellike"></b>
+                <br />
+
+                <span id="windSpe"></span>
+                <b id="windSpeed"></b>
+                <br />
+
+                <span id="humidity"></span>
+                <b id="humidityvalue"></b>
+                <br />
+
+                <span id="cloudiness"></span>
+                <b id="cloudPer"></b>
+                <br />
+
+                
+            </div>
+        </div>
+    </div>
+
+    <img id="wIcon" src="" />
+                <br />
+                <b id="cloud"></b>
+                <br />
+</body>
+
+</html>
+
+
+<script>
+
+
+    const apiKey = "74172e79654cc02502817640f7fc0e9f";
+
+
+    const icon = `openweathermap.org/img/wn/${weatherImage}@2x.png`;
+
+    var weatherImage;
+
+
+
+
+
+    $(document).ready(function () {
+
+
+        $(".btn").on("click", function () {
+
+            const inputVal = $("#city").val();
+            const link = `api.openweathermap.org/data/2.5/weather?q=${inputVal}&appid=${apiKey}&units=metric`;
+
+
+            $.ajax({
+                url: `https://${link}`,
+                dataType: 'json',
+                type: 'get',
+                cache: true,
+                success: function (data) {
+                    $(data.main).each(function (index, value) {
+
+                        console.log(value.feels_like);
+                        $('#temp').html(`${value.temp} °C`);
+                        $('#humidity').html("Humidity: ");
+                        $('#humidityvalue').html(`${value.humidity}%`);
+                        $('#temptxt').html("Temperature: ");
+                        $('#tempfeeltxt').html("Temperature feels like ");
+                        $('#feellike').html(`${value.feels_like} °C`);
+                    });
+
+                    $(data.weather).each(function (index, value) {
+
+                        console.log(data);
+                        var idIcon = value.icon;
+                        weatherImage = value.icon;
+
+                        const linkIcon = `http://openweathermap.org/img/wn/${weatherImage}@2x.png`;
+                        $("#wIcon").attr("src", linkIcon);
+
+                        $('#cloud').html(value.description);
+
+                    });
+
+                    $(data.wind).each(function (index, value) {
+                        console.log(value.speed);
+                        $('#windSpe').html("Windspeed: ");
+                        $('#windSpeed').html(`${value.speed} km/h`);
+
+
+                    });
+
+                    $(data.clouds).each(function (index, value) {
+                        $('#cloudiness').html("Cloudiness: ");
+                        $('#cloudPer').html(`${value.all}%`);
+
+                    });
+
+                }
+
+
+            });
+
+
+        });
+    });
+
+
+</script>
